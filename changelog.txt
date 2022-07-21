@@ -1,5 +1,6 @@
 V.Next
 ----------
+- [MINOR] Added application identifier to cache (physical identifier).  Prevents multiple apps using the same logical identifier from sharing tokens. (#1660)
 - [PATCH] Fix msal failing tests due to telemetry context (1788)
 - [MAJOR] Bumped MSAL Broker Protocol version to 8.0, GET_ACCOUNTS endpoint requires minimum_required_broker_protocol_version of 8.0+ to return an account constructed from PRT id token to FOCI apps. (#1771)
 - [MAJOR] [Msal] Remove launching logout endpoint in default browser for shared device mode signout flow
