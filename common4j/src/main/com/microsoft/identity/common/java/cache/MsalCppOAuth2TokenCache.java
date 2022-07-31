@@ -257,10 +257,11 @@ public class MsalCppOAuth2TokenCache
                 homeAccountId,
                 normalizedEnvironment,
                 CredentialType.RefreshToken,
-                null,
+                null, //wildcard (*)
+                null, //wildcard (*)
                 null, //wildcard (*)
                 normalizedRealm,
-                null,
+                null, //wildcard (*)
                 SCHEME_BEARER
         );
 

@@ -31,6 +31,7 @@ import static com.microsoft.identity.common.SharedPreferencesAccountCredentialCa
 import static com.microsoft.identity.common.SharedPreferencesAccountCredentialCacheTest.EXPIRES_ON;
 import static com.microsoft.identity.common.SharedPreferencesAccountCredentialCacheTest.HOME_ACCOUNT_ID;
 import static com.microsoft.identity.common.SharedPreferencesAccountCredentialCacheTest.LOCAL_ACCOUNT_ID;
+import static com.microsoft.identity.common.SharedPreferencesAccountCredentialCacheTest.MAM_ENROLLMENT_IDENTIFIER;
 import static com.microsoft.identity.common.SharedPreferencesAccountCredentialCacheTest.REALM;
 import static com.microsoft.identity.common.SharedPreferencesAccountCredentialCacheTest.SECRET;
 import static com.microsoft.identity.common.SharedPreferencesAccountCredentialCacheTest.SESSION_KEY;
@@ -161,6 +162,7 @@ public class BrokerOAuth2TokenCacheTest {
                 SECRET,
                 CLIENT_ID,
                 APPLICATION_IDENTIFIER,
+                MAM_ENROLLMENT_IDENTIFIER,
                 SECRET,
                 MOCK_ID_TOKEN_WITH_CLAIMS,
                 "1",
@@ -181,6 +183,7 @@ public class BrokerOAuth2TokenCacheTest {
                 SECRET,
                 CLIENT_ID,
                 APPLICATION_IDENTIFIER,
+                MAM_ENROLLMENT_IDENTIFIER,
                 SECRET,
                 MOCK_ID_TOKEN_WITH_CLAIMS,
                 null,
@@ -205,6 +208,7 @@ public class BrokerOAuth2TokenCacheTest {
                             SECRET,
                             UUID.randomUUID().toString(),
                             APPLICATION_IDENTIFIER,
+                            MAM_ENROLLMENT_IDENTIFIER,
                             SECRET,
                             MOCK_ID_TOKEN_WITH_CLAIMS,
                             null,
@@ -564,6 +568,7 @@ public class BrokerOAuth2TokenCacheTest {
         final ICacheRecord cacheRecord = mBrokerOAuth2TokenCache.load(
                 CLIENT_ID,
                 APPLICATION_IDENTIFIER,
+                MAM_ENROLLMENT_IDENTIFIER,
                 TARGET,
                 mDefaultAppUidTestBundle.mGeneratedAccount,
                 BEARER_AUTHENTICATION_SCHEME
@@ -589,6 +594,7 @@ public class BrokerOAuth2TokenCacheTest {
         final ICacheRecord cacheRecord = mBrokerOAuth2TokenCache.load(
                 CLIENT_ID,
                 APPLICATION_IDENTIFIER,
+                MAM_ENROLLMENT_IDENTIFIER,
                 TARGET,
                 mDefaultAppUidTestBundle.mGeneratedAccount,
                 BEARER_AUTHENTICATION_SCHEME
@@ -614,6 +620,7 @@ public class BrokerOAuth2TokenCacheTest {
         final ICacheRecord cacheRecord = mBrokerOAuth2TokenCache.load(
                 CLIENT_ID,
                 APPLICATION_IDENTIFIER,
+                MAM_ENROLLMENT_IDENTIFIER,
                 TARGET,
                 mDefaultFociTestBundle.mGeneratedAccount,
                 BEARER_AUTHENTICATION_SCHEME
@@ -957,6 +964,7 @@ public class BrokerOAuth2TokenCacheTest {
         final ICacheRecord retrievedResult = mBrokerOAuth2TokenCache.load(
                 mDefaultAppUidTestBundle.mGeneratedIdToken.getClientId(),
                 mDefaultAppUidTestBundle.mGeneratedAccessToken.getApplicationIdentifier(),
+                mDefaultAppUidTestBundle.mGeneratedAccessToken.getMamEnrollmentIdentifier(),
                 mDefaultAppUidTestBundle.mGeneratedAccessToken.getTarget(),
                 mDefaultAppUidTestBundle.mGeneratedAccount,
                 BEARER_AUTHENTICATION_SCHEME
@@ -1023,6 +1031,7 @@ public class BrokerOAuth2TokenCacheTest {
         final ICacheRecord retrievedResult = mBrokerOAuth2TokenCache.load(
                 mDefaultAppUidTestBundle.mGeneratedIdToken.getClientId(),
                 mDefaultAppUidTestBundle.mGeneratedAccessToken.getApplicationIdentifier(),
+                mDefaultAppUidTestBundle.mGeneratedAccessToken.getMamEnrollmentIdentifier(),
                 mDefaultAppUidTestBundle.mGeneratedAccessToken.getTarget(),
                 mDefaultAppUidTestBundle.mGeneratedAccount,
                 BEARER_AUTHENTICATION_SCHEME
@@ -1089,6 +1098,7 @@ public class BrokerOAuth2TokenCacheTest {
         final ICacheRecord retrievedResult = mBrokerOAuth2TokenCache.load(
                 mDefaultFociTestBundle.mGeneratedIdToken.getClientId(),
                 mDefaultFociTestBundle.mGeneratedAccessToken.getApplicationIdentifier(),
+                mDefaultFociTestBundle.mGeneratedAccessToken.getMamEnrollmentIdentifier(),
                 mDefaultFociTestBundle.mGeneratedAccessToken.getTarget(),
                 mDefaultFociTestBundle.mGeneratedAccount,
                 BEARER_AUTHENTICATION_SCHEME
@@ -1155,6 +1165,7 @@ public class BrokerOAuth2TokenCacheTest {
         final ICacheRecord retrievedResult = mBrokerOAuth2TokenCache.load(
                 mDefaultFociTestBundle.mGeneratedIdToken.getClientId(),
                 mDefaultFociTestBundle.mGeneratedAccessToken.getApplicationIdentifier(),
+                mDefaultFociTestBundle.mGeneratedAccessToken.getAccessTokenType(),
                 mDefaultFociTestBundle.mGeneratedAccessToken.getTarget(),
                 mDefaultFociTestBundle.mGeneratedAccount,
                 BEARER_AUTHENTICATION_SCHEME
