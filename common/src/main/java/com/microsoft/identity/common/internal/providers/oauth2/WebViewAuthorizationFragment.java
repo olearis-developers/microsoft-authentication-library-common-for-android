@@ -33,6 +33,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 
 import com.microsoft.identity.common.R;
+import com.microsoft.identity.common.internal.ui.webview.OAuth2WebViewFactory;
 import com.microsoft.identity.common.internal.ui.webview.challengehandlers.AbstractSmartcardCertBasedAuthManager;
 import com.microsoft.identity.common.internal.ui.webview.challengehandlers.CertBasedAuthFactory;
 import com.microsoft.identity.common.internal.ui.webview.challengehandlers.DialogHolder;
@@ -147,8 +149,17 @@ public class WebViewAuthorizationFragment extends AuthorizationFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final String methodTag = TAG + ":onCreateView";
-        final View view = inflater.inflate(R.layout.common_activity_authentication, container, false);
+        final RelativeLayout view = (RelativeLayout)inflater.inflate(R.layout.common_activity_authentication, container, false);
         mProgressBar = view.findViewById(R.id.common_auth_webview_progressbar);
+
+        mWebView = OAuth2WebViewFactory.getSharedInstance().createWebView(getContext());
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_START);
+        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        view.addView(mWebView, params);
 
         final FragmentActivity activity = getActivity();
         if (activity == null) {
@@ -235,7 +246,6 @@ public class WebViewAuthorizationFragment extends AuthorizationFragment {
     private void setUpWebView(@NonNull final View view,
                               @NonNull final AzureActiveDirectoryWebViewClient webViewClient) {
         // Create the Web View to show the page
-        mWebView = view.findViewById(R.id.common_auth_webview);
         WebSettings userAgentSetting = mWebView.getSettings();
         final String userAgent = userAgentSetting.getUserAgentString();
         mWebView.getSettings().setUserAgentString(
@@ -261,7 +271,7 @@ public class WebViewAuthorizationFragment extends AuthorizationFragment {
         mWebView.getSettings().setBuiltInZoomControls(webViewZoomControlsEnabled);
         mWebView.getSettings().setSupportZoom(webViewZoomEnabled);
         mWebView.setVisibility(View.INVISIBLE);
-        mWebView.setWebViewClient(webViewClient);
+        OAuth2WebViewFactory.getSharedInstance().setupWebView(mWebView, webViewClient);
     }
 
     // For CertBasedAuthChallengeHandler within AADWebViewClient,
